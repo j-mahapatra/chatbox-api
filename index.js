@@ -9,6 +9,7 @@ const {
 } = require('./middlewares/errorMiddleware');
 
 const userRouter = require('./routes/user');
+const chatRouter = require('./routes/chat');
 
 // Constants
 const PORT = process.env.PORT || 5000;
@@ -26,6 +27,7 @@ app.use(cookieParser());
 
 // Routes
 app.use('/api/user', userRouter);
+app.use('/api/chat', chatRouter);
 
 // Error handlers
 app.use(notFoundErrorHandler);
