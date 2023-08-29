@@ -10,6 +10,7 @@ const {
 
 const userRouter = require('./routes/user');
 const chatRouter = require('./routes/chat');
+const messageRouter = require('./routes/message');
 
 // Constants
 const PORT = process.env.PORT || 5000;
@@ -28,6 +29,7 @@ app.use(cookieParser());
 // Routes
 app.use('/api/user', userRouter);
 app.use('/api/chat', chatRouter);
+app.use('/api/message', messageRouter);
 
 // Error handlers
 app.use(notFoundErrorHandler);
