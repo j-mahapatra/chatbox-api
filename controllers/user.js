@@ -3,7 +3,7 @@ const User = require('../models/user');
 const { generateToken } = require('../utils/generateToken');
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, profilePicture } = req.body;
 
   // Checking for duplicate entries
   const isUsernameDuplicate = await User.exists({ username });
@@ -19,6 +19,7 @@ const registerUser = asyncHandler(async (req, res) => {
     username,
     email,
     password,
+    profilePicture: profilePicture || '',
   });
 
   if (!user) {
