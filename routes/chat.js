@@ -9,7 +9,7 @@ const {
 
 const router = express.Router();
 
-router.post('/create', checkAuth, createChat);
+router.put('/create', checkAuth, createChat);
 router.get('/all', checkAuth, getAllChats);
 router
   .route('/:id')
