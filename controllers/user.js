@@ -96,10 +96,23 @@ const updateUserDetails = asyncHandler(async (req, res) => {
   });
 });
 
+const getAllUsers = asyncHandler(async (req, res) => {
+  const allUsers = await User.find({}).select(
+    '-password -__v -createdAt -updatedAt'
+  );
+
+  if (!allUsers) {
+    throw new Error('No users found.');
+  }
+
+  return res.status(200).json({ allUsers });
+});
+
 module.exports = {
   registerUser,
   loginUser,
   logoutUser,
   getUserDetails,
   updateUserDetails,
+  getAllUsers,
 };
