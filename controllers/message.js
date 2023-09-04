@@ -34,4 +34,20 @@ const getMessageById = asyncHandler(async (req, res) => {
   res.status(200).json(message);
 });
 
-module.exports = { createMessage, getMessageById };
+const getMessageByChat = asyncHandler(async (req, res) => {
+  const message = await Message.findOne({ chat: req.params.id })
+    .populate('sender', '-password -__v')
+    .populate({
+      path: 'chat',
+      populate: { path: 'members admin', select: '-password -__v' },
+    });
+
+  if (!message) {
+    res.status(404);
+    throw new Error('Invalid chat ID.');
+  }
+
+  res.status(200).json(message);
+});
+
+module.exports = { createMessage, getMessageById, getMessageByChat };
