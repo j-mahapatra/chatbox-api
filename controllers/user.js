@@ -97,7 +97,7 @@ const updateUserDetails = asyncHandler(async (req, res) => {
 });
 
 const getAllUsers = asyncHandler(async (req, res) => {
-  const allUsers = await User.find({}).select(
+  const allUsers = await User.find({ _id: { $ne: req.user._id } }).select(
     '-password -__v -createdAt -updatedAt'
   );
 
