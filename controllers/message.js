@@ -35,7 +35,7 @@ const getMessageById = asyncHandler(async (req, res) => {
 });
 
 const getMessageByChat = asyncHandler(async (req, res) => {
-  const message = await Message.findOne({ chat: req.params.id })
+  const message = await Message.find({ chat: req.params.id })
     .populate('sender', '-password -__v')
     .populate({
       path: 'chat',
