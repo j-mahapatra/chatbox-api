@@ -7,6 +7,7 @@ const {
   notFoundErrorHandler,
   errorHandler,
 } = require('./middlewares/errorMiddleware');
+const http = require('http');
 
 const userRouter = require('./routes/user');
 const chatRouter = require('./routes/chat');
@@ -17,6 +18,13 @@ const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 const app = express();
+const server = http.createServer(app);
+const { Server } = require('socket.io');
+const io = new Server(server, {
+  cors: {
+    origin: process.env.CLIENT_URL,
+  },
+});
 
 // Database connection
 connectToDb(MONGODB_URI);
@@ -41,6 +49,9 @@ app.use('/api/message', messageRouter);
 app.use(notFoundErrorHandler);
 app.use(errorHandler);
 
-app.listen(PORT, () => {
+// Socket IO Connection
+io.on('connection', (socket) => {});
+
+server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
