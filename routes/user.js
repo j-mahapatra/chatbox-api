@@ -11,7 +11,7 @@ const { checkAuth } = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
-router.post('/signup', registerUser);
+router.put('/signup', registerUser);
 router.post('/login', loginUser);
 router.get('/logout', checkAuth, logoutUser);
 router
