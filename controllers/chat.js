@@ -38,13 +38,10 @@ const getChatById = asyncHandler(async (req, res) => {
     'members admin',
     '-password'
   );
+
   if (!chat) {
     res.status(404);
     throw new Error('Chat was not found');
-  }
-  if (!chat.admin.equals(req.user._id)) {
-    res.status(403);
-    throw new Error('Unauthorized access.');
   }
 
   return res.status(200).json(chat);
