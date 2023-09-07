@@ -50,7 +50,19 @@ app.use(notFoundErrorHandler);
 app.use(errorHandler);
 
 // Socket IO Connection
-io.on('connection', (socket) => {});
+io.on('connection', (socket) => {
+  socket.on('join-room', (roomId) => {
+    socket.join(roomId);
+  });
+
+  socket.on('leave-room', (roomId) => {
+    socket.leave(roomId);
+  });
+
+  socket.on('client-event', (roomId, message) => {
+    socket.to(roomId).emit('server-event', message);
+  });
+});
 
 server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
