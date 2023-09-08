@@ -1,6 +1,7 @@
 # Chatbox Chat App [API]
 
-Deployed: [Link](https://chatbox-api.up.railway.app/)
+- Deployed: [Link](https://chatbox-api.up.railway.app/)
+- Frontend Repo: [Link](https://github.com/j-mahapatra/chatbox-client/)
 
 This is the backend of a Chat app created using NodeJS, ExpressJS, MongoDB and SocketIO.
 
