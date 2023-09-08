@@ -46,7 +46,7 @@ const loginUser = asyncHandler(async (req, res) => {
     httpOnly: true,
     maxAge: 15 * 24 * 60 * 60 * 1000,
     secure: process.env.NODE_ENV === 'production',
-    sameSite: 'none',
+    sameSite: process.env.NODE_ENV === 'development' ? 'lax' : 'none',
   });
 
   return res.status(200).json({
@@ -59,6 +59,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     httpOnly: true,
     maxAge: 0,
     secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'development' ? 'lax' : 'none',
   });
   res.status(200).json({ message: 'User logged out succesfully.' });
 });
