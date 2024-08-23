@@ -20,9 +20,12 @@ const MONGODB_URI = process.env.MONGODB_URI;
 const app = express();
 const server = http.createServer(app);
 const { Server } = require('socket.io');
+
+console.log(`Request coming from ${process.env.CLIENT_URL}`);
+
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL,
+    origin: '*',
     credentials: true,
   },
 });
@@ -31,7 +34,7 @@ const io = new Server(server, {
 connectToDb(MONGODB_URI);
 
 const corsOptions = {
-  origin: [process.env.CLIENT_URL],
+  origin: '*',
   credentials: true,
   exposedHeaders: ['set-cookie'],
 };
