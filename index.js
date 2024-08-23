@@ -25,7 +25,7 @@ console.log(`Request coming from ${process.env.CLIENT_URL}`);
 
 const io = new Server(server, {
   cors: {
-    origin: '*',
+    origin: process.env.CLIENT_URL,
     credentials: true,
   },
 });
@@ -34,7 +34,7 @@ const io = new Server(server, {
 connectToDb(MONGODB_URI);
 
 const corsOptions = {
-  origin: '*',
+  origin: process.env.CLIENT_URL,
   credentials: true,
   exposedHeaders: ['set-cookie'],
 };
